@@ -1,0 +1,38 @@
+select ordnumber,totalUSD
+FROM Orders;
+
+select name, city
+FROM agents
+WHERE name= 'Smith';
+
+select pid, name, priceUSD
+FROM Products
+WHERE quantity > 200100;
+
+select name, city
+FROM customers
+WHERE city= 'Duluth';
+
+select name
+FROM agents
+WHERE city NOT IN('New York','Duluth');
+
+SELECT sub. *
+FROM (SELECT *
+	FROM Products
+	WHERE city NOT IN('New York','Duluth'))sub
+WHERE priceUSD>1;
+
+select *
+FROM orders
+where month = ('Feb') OR month = ('May');
+
+SELECT sub. *
+FROM (SELECT *
+	FROM Orders
+	WHERE month = ('Feb') )sub
+WHERE (totalUSD > 600) OR (totalUSD = 600);
+
+Select *
+FROM orders
+where cid = 'C005';
