@@ -1,0 +1,82 @@
+--1
+select city
+from agents
+where aid in (
+   	select aid
+	from orders
+	where cid = 'c006')
+	order by aid ASC;
+--2    
+select distinct pid 
+from orders
+where aid in(
+    select aid
+	from orders
+	where cid in (
+    	select cid
+		from customers
+		where city = 'Kyoto'))
+		order by pid ASC
+--3        
+select name, cid 
+from customers
+where cid in(
+    select distinct cid
+	from orders
+	where aid not in (
+    	select distinct aid
+		from orders
+		where aid = 'a01') )
+		order by cid DESC
+--4        
+select distinct cid
+from orders
+where cid in((
+    	select distinct cid
+		from orders
+		where pid = 'p01')
+        intersect 
+        (select distinct cid
+        from orders
+        where pid = 'p07' ))
+		order by cid ASC
+--5
+select pid 
+from orders
+where pid in(
+    select distinct pid
+	from orders
+	where cid in (
+    	select cid
+		from orders
+		where aid = 'a08'))
+--6
+select name, discount, city
+from customers
+where cid in(
+    select distinct cid
+	from orders
+	where aid in (
+    	select aid
+		from agents
+		where city = 'New York'
+		   or city = 'Tokyo'))
+--7
+select discount 
+from customers
+where cid in(
+    select distinct cid
+	from orders
+	where cid in (
+    	select cid
+		from customers
+		where city = 'London'
+		   or city = 'Duluth'))
+		order by cid ASC
+--8
+A check constraint is used to limit the value range that can be placed in a column.
+They are good for making it so that a field will only take a value between 2 predefined peramiters.
+The advantages are that you can now have a certain number of values and that you can make sure that everything meets 
+the specs that you want.
+An example of a good one is days of the week, but a bad one is days in the year. This is because there will always be
+7 days in the week but there can be either 365 or 366 days in the year.
