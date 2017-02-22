@@ -1,0 +1,62 @@
+-- 1
+select a.city as "agent"
+from orders o inner join customers c  on o.cid = c.cid
+			  inner join products  p on o.pid = p.pid
+			  inner join agents    a on o.aid = a.aid
+where c.cid = 'c006';
+
+-- 2
+
+select distinct p.pid as "poduct"
+from orders o inner join customers c  on o.cid = c.cid
+			  inner join products  p on o.pid = p.pid
+			  inner join agents    a on o.aid = a.aid
+where c.city = 'Kyoto';
+
+-- 3
+
+select name 
+from customers
+where cid in(
+    select distinct cid
+	from customers
+	where cid not in (
+    	select cid
+		from orders))
+-- 4        
+
+select distinct name
+from Customers
+full outer join Orders
+on Customers.cid = Orders.cid
+
+-- 5
+
+select distinct c.name as "Customer",
+	    		a.name as "Agent"
+from orders o inner join customers c  on o.cid = c.cid
+			  inner join products  p on o.pid = p.pid
+			  inner join agents    a on o.aid = a.aid
+where c.city = a.city;
+
+-- 6
+
+select distinct c.name as "Customer",
+	    		a.name as "Agent",
+                a.city as "Agent City",
+                c.city as "Customer City"
+from orders o inner join customers c  on o.cid = c.cid
+			  inner join products  p on o.pid = p.pid
+			  inner join agents    a on o.aid = a.aid
+where c.city = a.city;
+
+-- 7
+
+select distinct c.name as "Customer",
+	    		a.name as "Agent",
+                a.city as "Agent City",
+                c.city as "Customer City"
+from orders o inner join customers c  on o.cid = c.cid
+			  inner join products  p on o.pid = p.pid
+			  inner join agents    a on o.aid = a.aid
+where c.city = a.city;
