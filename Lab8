@@ -1,0 +1,111 @@
+----------------------------------------------------------------------------------------
+-- Postgres create, load, and query script for CAP4.
+--
+-- SQL statements for the CAP4 database
+-- 
+-- Derived from the CAP examples in _Database Principles, Programming, and Performance_, 
+--   Second Edition by Patrick O'Neil and Elizabeth O'Neil
+-- 
+-- Modified several times by Alan G. Labouseur
+-- 
+-- Tested on Postgres 9.3.2    (For earlier versions, you may need
+--   to remove the "if exists" clause from the DROP TABLE commands.)
+----------------------------------------------------------------------------------------
+
+-- Connect to your Postgres server and set the active database to CAP4. Then . . .
+
+DROP TABLE IF EXISTS Directors;
+DROP TABLE IF EXISTS Actors;
+DROP TABLE IF EXISTS Movies;
+
+
+
+
+
+-- Actors --
+CREATE TABLE Actors (
+  aid           	char(3) not null,
+  name          	text,
+  city          	text,
+  hair_clr			text,
+  eye_clr			text,
+  height_in_Inches	integer,
+  wieght_in_Pounds	integer,
+  Spouce			text,
+  fav_clr			text,
+  SAG_anni_month	text,	
+ primary key(aid)
+);        
+
+
+-- Movies --
+CREATE TABLE Movies (
+  Mid      			char(3) not null,
+  name     			text,
+  director     		text,
+  year_released		integer,
+  MPAA				text,
+  Domestic_BO_Sales integer,
+  Foreign_BO_Sales	integer,
+  DVDandBlueRay_Sales	integer,
+ primary key(Mid)
+);
+
+
+-- Directors -- 
+CREATE TABLE Directors (
+  Did				char(3) not null,
+  Name			    text,    
+  city				text,
+  Spouse			text,
+  Film_School		text,
+  DG_Anniversary	text,
+  Fav_Lense_Type	text,
+ primary key(Did)
+);
+
+
+
+-- SQL statements for loading example data 
+
+
+
+-- Agents --
+INSERT INTO Actors(aid,name,city,hair_clr,eye_clr,height_in_Inches,wieght_in_Pounds,Spouce,fav_clr,SAG_anni_month)
+VALUES('a01', 'Idris Elba','London', 'Black','Brown', 75, 196, 'Sonya Nicole Hamlin', 'Blue', 'Feb'),
+      ('a02', 'Michael Fassbender',	'London', 'Brown', 'Blue', 72, 176, 'Alicia Vikander', 'Red','May' ),
+      ('a03', 'Richard Madden', 'Elderslie', 'Brown', 'Blue', 70, 164, 'None', 'Green','June'),
+      ('a04', 'Tom Hardy', 'Hammersmith', 'Brown', 'Brown', 69, 166, 'Charlotte Riley', 'Green', 'Oct'),
+      ('a05', 'Andrew Lincoln',	'Somerset', 'Black', 'Brown', 70, 171, 'Gael Anderson', 'Blue', 'Sept');
+
+-- Movies --
+INSERT INTO Movies( Mid,name,director,year_released,MPAA,Domestic_BO_Sales,Foreign_BO_Sales,DVDandBlueRay_Sales)
+VALUES('m01', 'The Jungle Book', 'Jon Favreau', 2016, 'PG',	364001123, 599900000,40422029),
+      ('m02', 'Inglourious Basterds', 'Quentin Tarantino', 2009, 'R', 120774594, 196140670, 101552913),
+      ('m03', 'X-Men: First Class',	'Matthew Vaughn', 2011,	'PG-13', 146408305, 209000000, 66899749),
+      ('m04', 'Cinderella', 'Kenneth Branagh', 2015, 'PG', 201151353, 333400000, 43775698),
+      ('m05', 'The Dark Knight Rises', 'Christopher Nolan', 2012, 'PG-13', 448139099, 636300000, 151964926),
+      ('m06', 'Inception', 'Christopher Nolan',	2010, 'PG-13', 292576195, 540008221, 161049602),
+      ('m07', 'Love Actually', 'Richard Curtis', 2003, 'R',	59472278, 188477969, 74826412);
+
+-- Directors --
+INSERT INTO Directors( Did,Name,city,Spouse,Film_School,DG_Anniversary,Fav_Lense_Type)
+VALUES('d01', 'Jon Favreau', 'Queens', 'Joya Tillem', 'Queens College','Dec', 'Rokinon Cine'),
+      ('d02', 'Quentin Tarantino', 'Knoxville', 'None', 'None', 'Aug', 'Rokinon Xeen'),
+      ('d03', 'Matthew Vaughn',	'London', 'Claudia Schiffer', 'Stowe', 'Nov', 'Rokinon Xeen'),
+      ('d04', 'Kenneth Branagh', 'Belfast',	'Lindsay Brunnock',	'None',	'April', 'Rokinon CV'),
+      ('d05', 'Christopher Nolan', 'Los Angeles', 'Emma Thomas', 'None', 'March', 'Rokinon Cine'),
+      ('d06', 'Richard Curtis',	'Wellington', 'None', 'Papplewick School', 'Dec', 'Rokinon Cine');
+
+
+-- SQL statements for displaying the example data
+
+
+select *
+from Actors;
+
+select *
+from Movies;
+
+select *
+from Directors;
